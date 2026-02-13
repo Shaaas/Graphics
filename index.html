@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Q-Rator | Creative Portfolio</title>
+    <title>Qurator Agencies | Liyai Maina</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
     <style>
         :root {
@@ -11,75 +11,53 @@
             --accent: #ff0000;
             --text: #ffffff;
             --text-dim: #a0a0a0;
-            --transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+            --glass: rgba(255, 255, 255, 0.03);
+            --transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; }
         body { background: var(--bg); color: var(--text); overflow-x: hidden; line-height: 1.6; cursor: none; }
-
-        /* PREVENT SCROLL JUMP */
         html { scroll-behavior: smooth; }
 
-        /* CUSTOM CURSOR */
-        .cursor {
-            width: 8px; height: 8px; background: var(--accent);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 10000; transition: transform 0.1s ease, width 0.3s ease, height 0.3s ease;
-        }
-        .cursor-follower {
-            width: 40px; height: 40px; border: 1px solid var(--accent);
-            border-radius: 50%; position: fixed; pointer-events: none;
-            z-index: 9999; transition: transform 0.15s ease-out;
-        }
-
-        /* REVEAL ANIMATION */
-        .reveal { opacity: 0; transform: translateY(30px); transition: var(--transition); }
-        .reveal.active { opacity: 1; transform: translateY(0); }
+        /* CUSTOM CURSOR - THE DEV TOUCH */
+        .cursor { width: 8px; height: 8px; background: var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 10000; transition: transform 0.1s ease; }
+        .cursor-follower { width: 40px; height: 40px; border: 1px solid var(--accent); border-radius: 50%; position: fixed; pointer-events: none; z-index: 9999; transition: transform 0.2s ease-out; }
 
         /* NAV */
-        nav {
-            display: flex; justify-content: space-between; align-items: center;
-            padding: 20px 5%; position: fixed; width: 100%; z-index: 1000;
-            background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(20px);
-        }
-        .logo { font-weight: 900; letter-spacing: 5px; color: var(--accent); font-size: 1.5rem; }
-        nav ul { display: flex; list-style: none; gap: 40px; }
-        nav ul a { color: var(--text); text-decoration: none; font-size: 0.8rem; text-transform: uppercase; letter-spacing: 2px; }
+        nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; position: fixed; width: 100%; z-index: 1000; background: rgba(5, 5, 5, 0.8); backdrop-filter: blur(20px); border-bottom: 1px solid var(--glass); }
+        .logo { font-weight: 900; letter-spacing: 5px; color: var(--accent); font-size: 1.2rem; }
+        nav ul { display: flex; list-style: none; gap: 30px; }
+        nav ul a { color: var(--text); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; transition: 0.3s; }
+        nav ul a:hover { color: var(--accent); }
 
         /* HERO */
-        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; }
-        .hero h1 { font-size: clamp(3rem, 15vw, 8rem); font-weight: 900; line-height: 0.8; margin-bottom: 20px; }
-        .hero p { color: var(--text-dim); font-size: 1.2rem; max-width: 600px; }
+        .hero { height: 100vh; display: flex; flex-direction: column; justify-content: center; padding: 0 10%; background: radial-gradient(circle at 90% 10%, rgba(255,0,0,0.05) 0%, transparent 40%); }
+        .hero h1 { font-size: clamp(3rem, 12vw, 7.5rem); font-weight: 900; line-height: 0.85; margin-bottom: 20px; letter-spacing: -2px; }
+        .hero p { color: var(--text-dim); font-size: 1.1rem; max-width: 550px; margin-bottom: 40px; }
 
-        /* WORK GRID */
+        /* WORK SECTION */
         .work { padding: 100px 10%; }
-        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 60px; }
-        .card { position: relative; overflow: hidden; cursor: pointer; }
-        .img-wrap { overflow: hidden; background: #111; height: 500px; position: relative; }
-        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: transform 1.2s var(--transition); }
-        .card:hover img { transform: scale(1.1); }
-        .card-info { margin-top: 20px; }
-        .card-info h3 { font-size: 1.5rem; text-transform: uppercase; }
-        .card-info p { color: var(--accent); font-weight: 700; font-size: 0.8rem; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(400px, 1fr)); gap: 50px; }
+        .card { opacity: 0; transform: translateY(40px); transition: var(--transition); }
+        .card.active { opacity: 1; transform: translateY(0); }
+        .img-wrap { height: 500px; background: #111; overflow: hidden; margin-bottom: 20px; border-radius: 2px; }
+        .img-wrap img { width: 100%; height: 100%; object-fit: cover; transition: 1.5s var(--transition); filter: grayscale(1); }
+        .card:hover img { transform: scale(1.08); filter: grayscale(0); }
+        .card h3 { font-size: 1.5rem; margin-top: 15px; text-transform: uppercase; letter-spacing: 1px; }
+        .card span { color: var(--accent); font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 2px; }
 
-        /* ABOUT */
-        .about { padding: 150px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
-        .about img { width: 100%; border-radius: 2px; filter: grayscale(1); }
-        .about h2 { font-size: 4rem; line-height: 1; margin-bottom: 30px; }
+        /* ABOUT SECTION (LIYAI'S BIO) */
+        .about { padding: 150px 10%; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; border-top: 1px solid var(--glass); background: #080808; }
+        .about h2 { font-size: 4rem; line-height: 1; margin-bottom: 25px; }
+        .about p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 20px; max-width: 500px; }
 
-        /* BUTTON */
-        .btn {
-            display: inline-block; padding: 20px 50px; border: 1px solid var(--accent);
-            color: var(--text); text-decoration: none; text-transform: uppercase;
-            font-weight: 900; letter-spacing: 2px; margin-top: 40px; position: relative;
-            overflow: hidden; transition: 0.3s;
-        }
-        .btn:hover { background: var(--accent); box-shadow: 0 0 40px rgba(255,0,0,0.3); }
+        /* CTA */
+        .btn { display: inline-block; padding: 18px 45px; border: 1px solid var(--accent); color: #fff; text-decoration: none; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; transition: 0.3s; position: relative; overflow: hidden; }
+        .btn:hover { background: var(--accent); box-shadow: 0 0 30px rgba(255,0,0,0.4); }
 
-        @media (max-width: 900px) {
-            .about { grid-template-columns: 1fr; }
-            .grid { grid-template-columns: 1fr; }
-        }
+        footer { padding: 60px 10%; text-align: center; color: var(--text-dim); font-size: 0.75rem; border-top: 1px solid var(--glass); letter-spacing: 1px; }
+
+        @media (max-width: 900px) { .about { grid-template-columns: 1fr; } .hero h1 { font-size: 4.5rem; } .cursor, .cursor-follower { display: none; } body { cursor: auto; } }
     </style>
 </head>
 <body>
@@ -90,41 +68,57 @@
     <nav>
         <div class="logo">Q-RATOR</div>
         <ul>
-            <li><a href="#work">Work</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="#work">Showcase</a></li>
+            <li><a href="#about">The Agency</a></li>
         </ul>
     </nav>
 
     <header class="hero">
-        <h1 class="reveal">DISRUPT <br><span style="color:var(--accent)">IDENTITY.</span></h1>
-        <p class="reveal">Graphics and Visual Strategy by Liyai Maina. Reimagining brand narratives for a global digital stage.</p>
-        <div class="reveal"><a href="#work" class="btn">Explore Work</a></div>
+        <h1 class="reveal">BEYOND <br><span style="color:var(--accent)">VISUALS.</span></h1>
+        <p class="reveal">Liyai Maina is a graphic designer and visual strategist at Qurator Agencies, specializing in disruptive branding and editorial narratives.</p>
+        <div class="reveal"><a href="#work" class="btn">View Projects</a></div>
     </header>
 
     <section id="work" class="work">
         <div class="grid">
             <div class="card reveal">
-                <div class="img-wrap"><img src="project1.webp" alt="Design Project"></div>
-                <div class="card-info"><p>EDITORIAL</p><h3>The K.A.C Narrative</h3></div>
+                <div class="img-wrap"><img src="kac_narrative.webp" alt="The K.A.C Narrative"></div>
+                <span>Editorial Design</span>
+                <h3>The K.A.C Narrative</h3>
             </div>
+
             <div class="card reveal">
-                <div class="img-wrap"><img src="project2.webp" alt="Design Project"></div>
-                <div class="card-info"><p>BRANDING</p><h3>Net+ Identity</h3></div>
+                <div class="img-wrap"><img src="net_plus.webp" alt="Net+ Identity"></div>
+                <span>Brand Identity</span>
+                <h3>Net+ System</h3>
+            </div>
+
+            <div class="card reveal">
+                <div class="img-wrap"><img src="talanta.webp" alt="Talanta Tela Signature"></div>
+                <span>Graphic Art</span>
+                <h3>Talanta Tela Signature</h3>
             </div>
         </div>
     </section>
 
     <section id="about" class="about">
-        <div class="reveal"><img src="liyai.webp" alt="Liyai Maina"></div>
         <div class="reveal">
-            <h2>Meet the <br>Designer.</h2>
-            <p style="color:var(--text-dim)">Liyai Maina is a visual communicator specializing in bold branding and disruptive editorial design. Trained at the ALX Creative Academy, his work combines technical precision with artistic intuition.</p>
-            <a href="mailto:email@example.com" class="btn">Get in Touch</a>
+            <img src="liyai_profile.webp" alt="Liyai Maina" style="width:100%; border-radius: 2px; filter: grayscale(1);">
+        </div>
+        <div class="reveal">
+            <h2>Disruptive <br>Design.</h2>
+            <p>Based in Nairobi and operating globally, Liyai Maina bridges the gap between raw creative energy and strategic brand execution.</p>
+            <p>Through Qurator Agencies, every project is a study in precision, typography, and visual impact—trained through the ALX Creative Academy.</p>
+            <a href="mailto:liyai@example.com" class="btn">Start a Project</a>
         </div>
     </section>
 
+    <footer>
+        <p>&copy; 2026 Q-RATOR AGENCIES | LIYAI MAINA</p>
+    </footer>
+
     <script>
-        // CURSOR
+        // PREMIUM CURSOR
         const cursor = document.querySelector('.cursor');
         const follower = document.querySelector('.cursor-follower');
         document.addEventListener('mousemove', (e) => {
@@ -132,21 +126,20 @@
             follower.style.transform = `translate3d(${e.clientX - 16}px, ${e.clientY - 16}px, 0)`;
         });
 
-        // REVEAL ON SCROLL
+        // REVEAL SYSTEM
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) entry.target.classList.add('active');
             });
         }, { threshold: 0.1 });
 
-        document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+        document.querySelectorAll('.reveal, .card').forEach(el => observer.observe(el));
 
-        // CURSOR INTERACTION
+        // HOVER STATES
         document.querySelectorAll('a, .card, .btn').forEach(el => {
             el.addEventListener('mouseenter', () => {
                 follower.style.width = '80px';
                 follower.style.height = '80px';
-                follower.style.transform = `translate3d(${event.clientX - 36}px, ${event.clientY - 36}px, 0)`;
                 follower.style.background = 'rgba(255,0,0,0.1)';
             });
             el.addEventListener('mouseleave', () => {
