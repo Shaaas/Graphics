@@ -7,61 +7,41 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;700;900&display=swap" rel="stylesheet">
 
 <style>
-:root { --bg: #050505; --accent: #ff0000; --text: #ffffff; --text-dim: #a0a0a0; --glass: rgba(255, 255, 255, 0.08); }
-* { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
-body { background: var(--bg); color: var(--text); line-height: 1.6; overflow-x: hidden; }
+:root { --bg:#050505; --accent:#ff0000; --text:#ffffff; --text-dim:#a0a0a0; --glass:rgba(255,255,255,0.08); }
+*{margin:0;padding:0;box-sizing:border-box;font-family:'Inter',sans-serif;scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);line-height:1.6;overflow-x:hidden;}
+html{scroll-padding-top:120px;}
 
-html { scroll-padding-top: 120px; }
+nav{display:flex;justify-content:space-between;align-items:center;padding:25px 5%;position:fixed;width:100%;z-index:1000;background:rgba(5,5,5,0.95);backdrop-filter:blur(15px);border-bottom:1px solid var(--glass);}
+.logo{font-weight:900;letter-spacing:5px;color:var(--accent);cursor:pointer;text-transform:uppercase;}
+nav ul{display:flex;list-style:none;gap:20px;}
+nav ul a{color:var(--text);text-decoration:none;font-size:0.7rem;text-transform:uppercase;letter-spacing:2px;font-weight:700;}
 
-nav { display: flex; justify-content: space-between; align-items: center; padding: 25px 5%; position: fixed; width: 100%; z-index: 1000; background: rgba(5, 5, 5, 0.95); backdrop-filter: blur(15px); border-bottom: 1px solid var(--glass); }
-.logo { font-weight: 900; letter-spacing: 5px; color: var(--accent); cursor: pointer; text-transform: uppercase; }
-nav ul { display: flex; list-style: none; gap: 20px; }
-nav ul a { color: var(--text); text-decoration: none; font-size: 0.7rem; text-transform: uppercase; letter-spacing: 2px; font-weight: 700; }
+.view{display:none;min-height:100vh;padding-top:100px;}
+.view.active{display:block;animation:fadeIn 0.6s ease;}
+@keyframes fadeIn{from{opacity:0;}to{opacity:1;}}
 
-.view { display: none; min-height: 100vh; padding-top: 100px; opacity: 0; transition: opacity 0.4s ease; }
-.view.active { display: block; opacity: 1; }
+.hero{height:85vh;display:grid;grid-template-columns:1fr 1fr;align-items:center;padding:0 10%;gap:50px;}
+.hero-text h1{font-size:clamp(3.5rem,8vw,7rem);font-weight:900;line-height:0.85;text-transform:uppercase;margin-bottom:25px;}
+.hero-text p{color:var(--text-dim);font-size:1.2rem;border-left:4px solid var(--accent);padding-left:25px;max-width:500px;}
+.hero-img{width:100%;height:70vh;overflow:hidden;border:1px solid var(--glass);}
+.hero-img img{width:100%;height:100%;object-fit:cover;}
 
-.hero { height: 85vh; display: grid; grid-template-columns: 1fr 1fr; align-items: center; padding: 0 10%; gap: 50px; }
-.hero-text h1 { font-size: clamp(3.5rem, 8vw, 7rem); font-weight: 900; line-height: 0.85; text-transform: uppercase; margin-bottom: 25px; }
-.hero-text p { color: var(--text-dim); font-size: 1.2rem; border-left: 4px solid var(--accent); padding-left: 25px; max-width: 500px; }
-.hero-img { width: 100%; height: 70vh; overflow: hidden; border: 1px solid var(--glass); }
-.hero-img img { width: 100%; height: 100%; object-fit: cover; }
+.section-label{padding:100px 10% 20px;font-size:0.7rem;font-weight:900;letter-spacing:8px;color:var(--accent);text-transform:uppercase;text-align:center;}
 
-.case-intro-box { margin: 80px 10%; padding: 60px; background: #0a0a0a; border: 1px solid var(--glass); position: relative; }
-.case-intro-box::before { content: "STRATEGY"; position: absolute; top: -15px; left: 30px; background: var(--accent); padding: 5px 15px; font-size: 0.6rem; font-weight: 900; letter-spacing: 3px; }
-.case-intro-box h2 { font-size: 2.5rem; text-transform: uppercase; margin-bottom: 20px; }
-.case-intro-box p { color: var(--text-dim); font-size: 1.1rem; margin-bottom: 30px; max-width: 800px; }
+.archive-list{margin:0 10% 100px;}
+.archive-item{display:flex;justify-content:space-between;align-items:center;padding:18px 0;border-bottom:1px solid var(--glass);text-decoration:none;color:white;transition:0.3s;}
+.archive-item:hover{color:var(--accent);padding-left:10px;}
 
-.slide-link { display: inline-flex; align-items: center; gap: 15px; color: var(--accent); text-decoration: none; font-weight: 900; text-transform: uppercase; letter-spacing: 2px; border: 1px solid var(--accent); padding: 15px 30px; transition: 0.3s; }
-.slide-link:hover { background: var(--accent); color: white; }
+.masonry{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px;padding:0 10% 100px;}
+.masonry img{width:100%;height:250px;object-fit:cover;filter:grayscale(1);border:1px solid var(--glass);transition:0.5s;}
+.masonry img:hover{filter:grayscale(0);}
 
-.section-label { padding: 100px 10% 20px; font-size: 0.7rem; font-weight: 900; letter-spacing: 8px; color: var(--accent); text-transform: uppercase; text-align: center; }
+footer{padding:60px;text-align:center;font-size:0.6rem;opacity:0.3;letter-spacing:10px;border-top:1px solid var(--glass);}
 
-.grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; padding: 0 10% 100px; }
-.card { background: #0c0c0c; border: 1px solid var(--glass); cursor: pointer; transition: 0.4s; overflow: hidden; }
-.card:hover { border-color: var(--accent); transform: translateY(-10px); }
-.card img { width: 100%; height: 350px; object-fit: cover; filter: grayscale(1); }
-.card:hover img { filter: grayscale(0); }
-.card-content { padding: 25px; }
-
-.archive-list { margin: 0 10% 100px; }
-.archive-item { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--glass); text-decoration: none; color: white; transition: 0.3s; }
-.archive-item:hover { color: var(--accent); padding-left: 10px; }
-
-.masonry { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; padding: 0 10% 100px; }
-.masonry img { width: 100%; height: 250px; object-fit: cover; filter: grayscale(1); border: 1px solid var(--glass); transition: 0.5s; }
-.masonry img:hover { filter: grayscale(0); }
-
-.contact-section { padding: 120px 10%; text-align: center; border-top: 1px solid var(--glass); }
-.contact-links a { color: var(--text); font-weight: 900; text-decoration: none; font-size: 1.1rem; margin: 0 20px; letter-spacing: 3px; }
-.contact-links a:hover { color: var(--accent); }
-
-.case-view { padding: 150px 10% 100px; max-width: 1200px; margin: 0 auto; }
-footer { padding: 60px; text-align: center; font-size: 0.6rem; opacity: 0.3; letter-spacing: 10px; border-top: 1px solid var(--glass); }
-
-@media (max-width: 900px) {
-.hero { grid-template-columns: 1fr; height: auto; padding: 50px 10%; }
-.hero-img { height: 400px; }
+@media(max-width:900px){
+.hero{grid-template-columns:1fr;height:auto;padding:50px 10%;}
+.hero-img{height:400px;}
 }
 </style>
 </head>
@@ -72,8 +52,8 @@ footer { padding: 60px; text-align: center; font-size: 0.6rem; opacity: 0.3; let
 <div class="logo" onclick="showView('home')">Q-RATOR</div>
 <ul>
 <li>
-<a href="#" onclick="showView('home'); setTimeout(()=>{document.getElementById('projects').scrollIntoView({behavior:'smooth'});},100); return false;">
-Projects
+<a href="#" onclick="showView('home');setTimeout(()=>{document.getElementById('archive').scrollIntoView({behavior:'smooth'});},100);return false;">
+WORK
 </a>
 </li>
 <li><a href="https://www.instagram.com/liyai_maina/" target="_blank">Instagram</a></li>
@@ -92,85 +72,77 @@ Projects
 </div>
 </section>
 
-<section class="case-intro-box">
-<h2>The Case Study Presentation</h2>
-<p>Go beyond the visuals. Access the strategic foundation behind these reforms.</p>
-<a href="#" class="slide-link" onclick="window.open(encodeURI('Gate-keeping in the Arts, Culture and Design Space_.pptx'),'_blank')">
-View Presentation Slides →
-</a>
-</section>
-
-<div id="projects" class="section-label">Selected Works</div>
-
-<section class="grid">
-<div class="card" onclick="openProject('p1')">
-<img src="Liyai (5).jpeg" alt="">
-<div class="card-content"><h3>Net Plus Identity</h3></div>
-</div>
-
-<div class="card" onclick="openProject('p2')">
-<img src="Liyai (6).jpeg" alt="">
-<div class="card-content"><h3>K.A.C Magazine</h3></div>
-</div>
-
-<div class="card" onclick="openProject('p3')">
-<img src="Liyai (11).jpeg" alt="">
-<div class="card-content"><h3>Talanta Hela</h3></div>
-</div>
-</section>
+<div id="archive" class="section-label">Master Repository</div>
 
 <section class="archive-list">
-<a href="#" class="archive-item" onclick="window.open(encodeURI('Talanta Hela - Logo_s.pdf'),'_blank')"><span>Talanta Hela National Framework</span><span>PDF</span></a>
-<a href="#" class="archive-item" onclick="window.open(encodeURI('Re-Brand Project1.pdf'),'_blank')"><span>Net Plus Rebrand Docs</span><span>PDF</span></a>
-<a href="#" class="archive-item" onclick="window.open(encodeURI('DTP shipping solutions Logo.pdf'),'_blank')"><span>DTP Shipping Logistics</span><span>PDF</span></a>
-<a href="#" class="archive-item" onclick="window.open(encodeURI('DTP Logo #2 [Recovered]-1.pdf'),'_blank')"><span>DTP Recovered #2</span><span>PDF</span></a>
-<a href="#" class="archive-item" onclick="window.open(encodeURI('FemiTech Design 2.pdf'),'_blank')"><span>FemiTech Solutions</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('Gate-keeping in the Arts, Culture and Design Space_.pptx')"><span>Gate-keeping Presentation</span><span>PPTX</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('Talanta Hela - Logo_s.pdf')"><span>Talanta Hela - Logo_s</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('Re-Brand Project1.pdf')"><span>Net Plus Rebrand</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('DTP shipping solutions Logo.pdf')"><span>DTP Shipping Logo</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('DTP Logo #2 [Recovered]-1.pdf')"><span>DTP Logo #2 Recovered</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('FemiTech Design 2.pdf')"><span>FemiTech Design</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('Femitech Letterhead copy.pdf')"><span>FemiTech Letterhead</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('PCI brandmark logo.pdf')"><span>PCI Brandmark</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('PCI emblem logo.pdf')"><span>PCI Emblem</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('Elite Transport & Moving Company.pdf')"><span>Elite Transport</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('Peaches_ Cocktail Menu.pdf')"><span>Peaches Cocktail Menu</span><span>PDF</span></a>
+
+<a href="#" class="archive-item" onclick="openFile('Document from Liyai Maina (1).pdf')"><span>Kenyan Art Culture Mag</span><span>PDF</span></a>
+
 </section>
 
-<section id="contact" class="contact-section">
-<div class="contact-links">
-<a href="mailto:liyaimaina@gmail.com">EMAIL</a>
-<a href="https://www.instagram.com/liyai_maina/" target="_blank">INSTAGRAM</a>
-<a href="https://github.com/shaaas" target="_blank">GITHUB</a>
-</div>
+<div class="section-label">Visual Index</div>
+
+<section class="masonry">
+<img src="1.png">
+<img src="Liyai (1).jpeg">
+<img src="Liyai (2).jpeg">
+<img src="Liyai (3).jpeg">
+<img src="Liyai (4).jpeg">
+<img src="Liyai (5).jpeg">
+<img src="Liyai (6).jpeg">
+<img src="Liyai (7).jpeg">
+<img src="Liyai (8).jpeg">
+<img src="Liyai (9).jpeg">
+<img src="Liyai (10).jpeg">
+<img src="Liyai (11).jpeg">
+<img src="Liyai (12).jpeg">
+<img src="Liyai (13).jpeg">
+<img src="Liyai (14).jpeg">
+<img src="Liyai (15).jpeg">
+<img src="Liyai (16).jpeg">
+<img src="Liyai (17).jpeg">
+<img src="Liyai (18).jpeg">
+<img src="Liyai (19).jpeg">
+<img src="Liyai (20).jpeg">
+<img src="Liyai (21).jpeg">
+<img src="Liyai (22).jpeg">
 </section>
 
 <footer>Q-RATOR AGENCIES © 2026</footer>
 
 </main>
 
-<section id="project-page" class="view case-view">
-<div id="project-content"></div>
-</section>
-
 <script>
-const projectData = {
-p1: { title: "Net Plus Identity", type: "Identity System", mission: "Fusing organic enlightenment with institutional trust.", img: "Liyai (5).jpeg", file: "Re-Brand Project1.pdf" },
-p2: { title: "K.A.C Narrative", type: "Editorial Design", mission: "Reclaiming cultural narratives through luxury layout.", img: "Liyai (6).jpeg", file: "Document from Liyai Maina (1).pdf" },
-p3: { title: "Talanta Hela", type: "Advocacy", mission: "National framework for creative monetization.", img: "Liyai (11).jpeg", file: "Talanta Hela - Logo_s.pdf" }
-};
-
-function showView(v) {
-document.querySelectorAll('.view').forEach(x => x.classList.remove('active'));
+function showView(v){
+document.querySelectorAll('.view').forEach(x=>x.classList.remove('active'));
 document.getElementById(v).classList.add('active');
 window.scrollTo({top:0,behavior:'smooth'});
 }
 
-function openProject(id) {
-const p = projectData[id];
-document.getElementById('project-content').innerHTML = `
-<p onclick="showView('home')" style="color:var(--accent); cursor:pointer; font-weight:900;">← BACK</p>
-<div style="margin-top:50px; display:grid; grid-template-columns:1fr 1fr; gap:40px;">
-<div>
-<h2 style="font-size:4rem; text-transform:uppercase; margin-bottom:20px;">${p.title}</h2>
-<p style="color:var(--accent); font-weight:900; text-transform:uppercase; margin-bottom:20px;">${p.type}</p>
-<p style="color:var(--text-dim); margin-bottom:30px;">${p.mission}</p>
-<a href="#" onclick="window.open(encodeURI('${p.file}'),'_blank')" class="slide-link">Open PDF Case Study</a>
-</div>
-<div><img src="${p.img}" style="width:100%; border:1px solid var(--glass);"></div>
-</div>
-`;
-showView('project-page');
+function openFile(filename){
+window.open(encodeURI(filename),'_blank');
 }
 </script>
 
